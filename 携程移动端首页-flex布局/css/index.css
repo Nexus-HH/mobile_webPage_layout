@@ -1,0 +1,326 @@
+body {
+    max-width: 540px;
+    min-width: 320px;
+    margin: 0 auto;
+    font: normal 14px/1.5 Tahoma, "Lucida Grande", Verdana, "Microsoft Yahei", STXihei, hei;
+    color: #000;
+    background: #f2f2f2;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+a{
+    text-decoration: none;
+    color: #222;
+}
+/* C3盒子模型 */
+div{
+    box-sizing: border-box;
+}
+ul,ol{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+/* goBack */
+.goBack {
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    width: 38px;
+    height: 38px;
+    background: url(../images/back.png) no-repeat;
+    background-size: 38px 38px;
+    z-index: 999;
+}
+
+.search_index{
+    display: flex;
+    /* 固定定位和父级没有关系，以屏幕为准 */
+    position: fixed;
+    top: 0px;
+    /* 固定定位要居中的话不能用margin，这样无效，可以利用left，设置为50% */
+    left: 50%;
+    /* left设置为50%后还要将盒子向左移动其宽度的一半才能使其居中，而这个盒子的宽度不是固定的，所以我们应该利用translateX，设置的百分比就是指元素本身的宽度 */
+    /* 兼容老版本的浏览器 */
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    /* 固定定位的盒子应该要有宽度 */
+    width: 100%;
+    min-width: 320px;
+    max-width: 540px;
+    height: 44px;
+    background-color: #f6f6f6;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    z-index: 9999;
+}
+.search{
+    flex: 1;
+    height: 26px;
+    position: relative;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    color: #666;
+    margin: 7px 10px;
+    border-radius: 5px;
+    /* 由于使用的是C3的盒子，所以会有上下两个像素的边框，所以行高应该取24才能垂直居中 */
+    line-height: 24px;
+    padding-left: 25px;
+    box-shadow: 0 2px 4px rgba(0,0, 0, .2);
+}
+.search::before{
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 15px;
+    height: 15px;
+    background: url(../images/sprite.png) no-repeat -59px -279px;
+    background-size: 104px auto;
+}
+.user{
+    width: 44px;
+    height: 44px;
+    color: #2eaae0;
+    font-size: 12px;
+    text-align: center;
+}
+.user::before{
+    content: "";
+    display: block;
+    width: 23px;
+    height: 23px;
+    background: url(../images/sprite.png) no-repeat -59px -194px;
+    background-size: 104px auto;
+    /* margin取负值就能使下面的文字上移 */
+    margin: 5px auto -2px;
+}
+.focus{
+    overflow: hidden;
+    position: relative;
+    padding-top: 44px;
+}
+.focus ul{
+    overflow: hidden;
+    width: 500%;
+    margin-left: -100%;
+}
+.focus ul li{
+    width: 20%;
+    float: left;
+}
+.focus img{
+    width: 100%;
+}
+.focus ol{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+.focus ol li{
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 2px;
+    background-color: #fff;
+    transition: all .3;
+}
+.focus ol .current{
+    width: 15px;
+}
+
+.local_nav{
+    display: flex;
+    height: 64px;
+    border-radius: 8px;
+    background-color: #fff;
+    margin: 3px 4px;
+}
+.local_nav li{
+    flex: 1;
+}
+.local_nav a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+}
+.local_nav li [class^="local_nav_icon"]{
+    width: 32px;
+    height: 32px;
+    margin-top: 8px;
+    background: url(../images/localnav_bg.png) no-repeat 0 0;
+    background-size: 32px auto;
+}
+.local_nav li .local_nav_icon_2{
+    background-position: 0 -32px;
+}
+.local_nav li .local_nav_icon_3{
+    background-position: 0 -64px;
+}
+.local_nav li .local_nav_icon_4{
+    background-position: 0 -96px;
+}
+.local_nav li .local_nav_icon_5{
+    background-position: 0 -128px;
+}
+
+nav{
+    margin: 0 4px 3px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.nav_common{
+    height: 88px;
+    display: flex;
+}
+.nav_common:nth-child(1){
+    background: -webkit-linear-gradient(left, #fa5a55, #fa994d);
+}
+.nav_common:nth-child(2){
+    margin: 3px 0;
+    background: -webkit-linear-gradient(left, #4b90ed, #538ced);
+}
+.nav_common:nth-child(3){
+    background: -webkit-linear-gradient(left, #34c2a9, #6cd559);
+}
+.nav_items{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+/* -n+2选前两个盒子 */
+.nav_items:nth-child(-n+2){
+    border-right: 1px solid #fff;
+}
+.nav_items a{
+    flex: 1;
+    text-align: center;
+    line-height: 44px;
+    color: #fff;
+    text-shadow: 1px 1px rgba(0, 0, 0, .2);
+}
+.nav_items a:nth-child(1){
+    border-bottom: 1px solid #fff;
+}
+.nav_items:nth-child(1) a{
+    border: 0;
+    background: url(../images/hotel.png) no-repeat bottom center;
+    background-size: 121px auto;
+}
+
+.subnav_entry{
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0px 4px;
+    padding: 5px 0px;
+    background-color: #fff;
+}
+.subnav_entry li{
+    flex: 20%;
+}
+.subnav_entry li a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.subnav_entry li a [class^="subnav_entry_icon"]{
+    width: 28px;
+    height: 28px;
+    background-color: orange;
+    margin-top: 4px;
+    background: url(../images/subnav-bg.png) no-repeat;
+    background-size: 28px auto;
+}
+.subnav_entry li a .subnav_entry_icon_2{
+    background-position: 0 -30px;
+}
+.subnav_entry li a .subnav_entry_icon_3{
+    background-position: 0 -63px;
+}
+.subnav_entry li a .subnav_entry_icon_4{
+    background-position: 0 -321px;
+}
+.subnav_entry li a .subnav_entry_icon_5{
+    background-position: 0 -98px;
+}
+.subnav_entry li a .subnav_entry_icon_6{
+    background-position: 0 -162px;
+}
+.subnav_entry li a .subnav_entry_icon_7{
+    background-position: 0 -197px;
+}
+.subnav_entry li a .subnav_entry_icon_8{
+    background-position: 0 -128px;
+}
+.subnav_entry li a .subnav_entry_icon_9{
+    background-position: 0 -226px;
+}
+.subnav_entry li a .subnav_entry_icon_10{
+    background-position: 0 -284px;
+}
+
+.sales-box {
+    border-top: 1px solid #bbb;
+    background-color: #fff;
+    margin: 4px;
+}
+.sales-hd {
+    position: relative;
+    height: 44px;
+    border-bottom: 1px solid #ccc;
+}
+.sales-hd h2 {
+    position: relative;
+    /* 隐藏文字 */
+    text-indent: -999px;
+    overflow: hidden;
+}
+.sales-hd h2::after {
+    position: absolute;
+    top: 5px;
+    left: 8px;
+    content: "";
+    width: 79px;
+    height: 15px;
+    background: url(../images/hot.png) no-repeat 0 -20px;
+    background-size: 79px auto;
+}
+.more {
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    background: -webkit-linear-gradient(left, #FF506C, #FF6BC6);
+    border-radius: 15px;
+    padding: 3px 20px 3px 10px;
+    color: #fff;
+}
+.more::after {
+    /* 箭头用伪类来实现 */
+    content: "";
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    width: 7px;
+    height: 7px;
+    /* 边框再旋转 */
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform: rotate(45deg);
+}
+.row {
+    display: flex;
+}
+.row a {
+    flex: 1;
+    border-bottom: 1px solid #eee;
+}
+.row a:nth-child(1) {
+    border-right: 1px solid #eee;
+}
+.row a img {
+    width: 100%;
+}
